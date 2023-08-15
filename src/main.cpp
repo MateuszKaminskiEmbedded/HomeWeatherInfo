@@ -20,7 +20,7 @@ void setup () {
     while (1)
     {
       Serial.println("Couldn't find RTC");
-      delay(100);
+      delay(500);
     } 
   }
 
