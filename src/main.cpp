@@ -3,6 +3,14 @@
 #include "RTClib.h"
  #include <SPI.h>
 
+/*****************************************************************************************************************
+ * zrobić albo zainportować bibliotekę logów
+ * dodać instrukcje kompilacji warunkowej (każda biblioteka ma byc właczna i wyłaczana)
+ * dodać plik z definicją pinów (żeby definicja każdego pinu była jawna i w jednym miejscu)
+ * dodać czujniki: co2, wilgotność, ciśnienie, temperatura (2szt. zewnętrzne), RTC uporzadkować, wyświetlacz, ADC
+ * Mając uruchomione powyższe rzeczy, można przystąpić do pisania algorytmu.
+ *****************************************************************************************************************/
+
 RTC_DS1307 rtc;
 
 char daysOfTheWeek[7][12] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
