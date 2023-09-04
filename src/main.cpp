@@ -1,9 +1,6 @@
-//#include <Arduino.h>
+#include <Arduino.h>
 #include <stdio.h>
 #include "log.h"
-#include "IRcommunication.h"
-#include <Adafruit_I2CDevice.h>
-#include <SPI.h>
 
 LogLibrary logger(DEBUG);
 
