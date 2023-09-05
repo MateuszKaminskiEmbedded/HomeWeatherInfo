@@ -3,12 +3,21 @@
 #include "log.h"
 #include <Wire.h>
 
+#include "system_config.h"
+#include "types.h"
+
 #define I2C_TEMP_HUM_ADDRESS 0x38
 
-LogLibrary logger(DEBUG);
+#if (SYSTEM_LOG == STD_ON)
+  LogLibrary logger(DEBUG);
+#endif
 
 void setup() {
-  Serial.begin(115200);
+
+#if (SERIAL_PORT == STD_ON)
+  Serial.begin(SERIAL_BAUDRATE);
+#endif
+
   Wire.begin();
 
  }
