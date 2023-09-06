@@ -1,3 +1,19 @@
+/************************************************************************
+* autor:        Kamiński Mateusz
+* project:      HomeWeatherInfo
+* purpose:      Project should be helpfull in analize weather parameters
+*               and indor air parameters. Dvice should be also give
+*               parameters of centrl heatiing system.
+* destination:  The project is for home and is development platform
+* for peoject   weather station (created simultaneously).
+* start date:   08.2023
+* version:      001.00b
+*
+************************************************************************/
+
+/***********************************************************************
+  Include section
+************************************************************************/
 #include <Arduino.h>
 #include <stdio.h>
 #include "log.h"
@@ -6,57 +22,80 @@
 #include "system_config.h"
 #include "types.h"
 
+/***********************************************************************
+  Global valiables section
+************************************************************************/
+
+/***********************************************************************
+  Declaration functions section
+************************************************************************/
+
+/***********************************************************************
+  Define section
+************************************************************************/
 #define I2C_TEMP_HUM_ADDRESS 0x38
 
 #if (SYSTEM_LOG == STD_ON)
   LogLibrary logger(DEBUG);
 #endif
 
+/***********************************************************************
+  Setup function section
+************************************************************************/
 void setup() {
 
-#if (SERIAL_PORT == STD_ON)
-  Serial.begin(SERIAL_BAUDRATE);
-#endif
+  #if (SERIAL_PORT == STD_ON)
+    Serial.begin(SERIAL_BAUDRATE);
+  #endif
 
   Wire.begin();
 
  }
 
+/***********************************************************************
+  Loop function section
+************************************************************************/
 void loop() {
-  logger.log(DEBUG, "This is a debug message");
-  logger.log(INFO, "This is an info message");
-  logger.log(WARNING, "This is a warning message");
-  logger.log(ERROR, "This is an error message");
+  #if (SYSTEM_LOG == STD_ON)
+    logger.log(DEBUG, "This is a debug message");
+    logger.log(INFO, "This is an info message");
+    logger.log(WARNING, "This is a warning message");
+    logger.log(ERROR, "This is an error message");
+  #endif
 
-   byte error, address;
-  int nDevices;
-  Serial.println("Scanning...");
-  nDevices = 0;
-  for(address = 1; address < 127; address++ ) {
-    Wire.beginTransmission(address);
-    error = Wire.endTransmission();
-    if (error == 0) {
-      Serial.print("I2C device found at address 0x");
-      if (address<16) {
-        Serial.print("0");
-      }
-      Serial.println(address,HEX);
-      nDevices++;
-    }
-    else if (error==4) {
-      Serial.print("Unknow error at address 0x");
-      if (address<16) {
-        Serial.print("0");
-      }
-      Serial.println(address,HEX);
-    }    
-  }
-  if (nDevices == 0) {
-    Serial.println("No I2C devices found\n");
-  }
-  else {
-    Serial.println("done\n");
-  }
+  //  byte error, address;
+  // int nDevices;
+  // Serial.println("Scanning...");
+  // nDevices = 0;
+  // for(address = 1; address < 127; address++ ) {
+  //   Wire.beginTransmission(address);
+  //   error = Wire.endTransmission();
+  //   if (error == 0) {
+  //     Serial.print("I2C device found at address 0x");
+  //     if (address<16) {
+  //       Serial.print("0");
+  //     }
+  //     Serial.println(address,HEX);
+  //     nDevices++;
+  //   }
+  //   else if (error==4) {
+  //     Serial.print("Unknow error at address 0x");
+  //     if (address<16) {
+  //       Serial.print("0");
+  //     }
+  //     Serial.println(address,HEX);
+  //   }    
+  // }
+  // if (nDevices == 0) {
+  //   Serial.println("No I2C devices found\n");
+  // }
+  // else {
+  //   Serial.println("done\n");
+  // }
 
   delay(1000);
 }
+
+/***********************************************************************
+  Definition functions section
+************************************************************************/
