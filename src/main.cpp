@@ -8,7 +8,8 @@
 * for peoject   weather station (created simultaneously).
 * start date:   08.2023
 * version:      001.00b
-*
+* 
+* @todo add sensors, log library repair
 ************************************************************************/
 
 /***********************************************************************
@@ -18,9 +19,9 @@
 #include <stdio.h>
 #include "log.h"
 #include <Wire.h>
-
 #include "system_config.h"
 #include "types.h"
+#include "AHT20Sensor.h"
 
 /***********************************************************************
   Global valiables section
@@ -33,11 +34,6 @@
 /***********************************************************************
   Define section
 ************************************************************************/
-#define I2C_TEMP_HUM_ADDRESS 0x38
-
-#if (SYSTEM_LOG == STD_ON)
-  LogLibrary logger(DEBUG);
-#endif
 
 /***********************************************************************
   Setup function section
@@ -48,8 +44,11 @@ void setup() {
     Serial.begin(SERIAL_BAUDRATE);
   #endif
 
-  Wire.begin();
-
+  #if (I2CBUS_PORT1 == STD_ON)
+    Wire.begin();
+  #endif
+    
+    AHT20_Init();
  }
 
 /***********************************************************************
@@ -57,43 +56,16 @@ void setup() {
 ************************************************************************/
 void loop() {
   #if (SYSTEM_LOG == STD_ON)
-    logger.log(DEBUG, "This is a debug message");
-    logger.log(INFO, "This is an info message");
-    logger.log(WARNING, "This is a warning message");
-    logger.log(ERROR, "This is an error message");
+    // log(DEBUG, "This is a debug message");
+    // log(INFO, "This is an info message");
+    // log(WARNING, "This is a warning message");
+    // log(ERROR, "This is an error message");
+    // log(ERROR, "This is an error message", (float) 100.11);
   #endif
 
-  //  byte error, address;
-  // int nDevices;
-  // Serial.println("Scanning...");
-  // nDevices = 0;
-  // for(address = 1; address < 127; address++ ) {
-  //   Wire.beginTransmission(address);
-  //   error = Wire.endTransmission();
-  //   if (error == 0) {
-  //     Serial.print("I2C device found at address 0x");
-  //     if (address<16) {
-  //       Serial.print("0");
-  //     }
-  //     Serial.println(address,HEX);
-  //     nDevices++;
-  //   }
-  //   else if (error==4) {
-  //     Serial.print("Unknow error at address 0x");
-  //     if (address<16) {
-  //       Serial.print("0");
-  //     }
-  //     Serial.println(address,HEX);
-  //   }    
-  // }
-  // if (nDevices == 0) {
-  //   Serial.println("No I2C devices found\n");
-  // }
-  // else {
-  //   Serial.println("done\n");
-  // }
+    AHT20getValue();
 
-  delay(1000);
+    delay(1000);
 }
 
 /***********************************************************************
