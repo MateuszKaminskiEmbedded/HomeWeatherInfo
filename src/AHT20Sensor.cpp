@@ -7,28 +7,38 @@ DFRobot_AHT20 aht20;
 
 void AHT20_Init(void){
   while(aht20.begin() != 0){
-    log(ERROR, "AHT20 sensor initialization failed");
+    #if(SYSTEM_LOG == STD_ON)
+      log(ERROR, "AHT20 sensor initialization failed");
+    #endif
     delay(20);
   }
-  log(INFO, "AHT20 sensor initialization successful");
+  #if(SYSTEM_LOG == STD_ON)
+    log(INFO, "AHT20 sensor initialization successful");
+    log(INFO, "AHT20 sensor start work");
+  #endif
 }
-
-
 
 AHT20_values AHT20getValue(void){
 
   AHT20_values values;
 
   if(aht20.startMeasurementReady(/* crcEn = */true)){
-    log(INFO, "AHT20 sensor measurement ready");
+    #if(SYSTEM_LOG == STD_ON)
+      log(INFO, "AHT20 sensor measurement ready");
+    #endif
     // Get temp in Celsius (℃), range -40-80℃
     values.temperature = aht20.getTemperature_C();
     // Get relative humidity (%RH), range 0-100℃
     values.humidity = aht20.getHumidity_RH();
 
-    log(INFO, "AHT20 sensor get values successful");
-  }else
-    log(INFO, "AHT20 sensor measurement not ready");
+    #if(SYSTEM_LOG == STD_ON)
+      log(INFO, "AHT20 sensor get values successful");
+    #endif
+  }else{
+    #if(SYSTEM_LOG == STD_ON)
+      log(INFO, "AHT20 sensor measurement not ready");
+    #endif
+  }
 
   return values;
 }
