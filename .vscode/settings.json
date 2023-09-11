@@ -11,6 +11,7 @@
         "memory": "cpp",
         "random": "cpp",
         "initializer_list": "cpp",
-        "esp32-hal.h": "c"
+        "esp32-hal.h": "c",
+        "optional": "cpp"
     }
 }

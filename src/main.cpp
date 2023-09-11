@@ -55,17 +55,14 @@ void setup() {
   Loop function section
 ************************************************************************/
 void loop() {
-  #if (SYSTEM_LOG == STD_ON)
-    // log(DEBUG, "This is a debug message");
-    // log(INFO, "This is an info message");
-    // log(WARNING, "This is a warning message");
-    // log(ERROR, "This is an error message");
-    // log(ERROR, "This is an error message", (float) 100.11);
-  #endif
 
-    AHT20getValue();
+  AHT20_values values;
+  values = AHT20getValue();
 
-    delay(1000);
+  log(INFO, "AHT20 sensor temp [C]: ", values.temperature);
+  log(INFO, "AHT20 sensor hum [%]: ", values.humidity);
+
+  delay(1000);
 }
 
 /***********************************************************************

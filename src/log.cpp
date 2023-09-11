@@ -37,7 +37,7 @@ void log(LogLevel level, const char* message) {
           break;
       }
       Serial.print(message);
-      Serial.print(value);
+      Serial.println(value);
   }
 
   void log(LogLevel level, const char* message, float value) {
@@ -56,5 +56,5 @@ void log(LogLevel level, const char* message) {
           break;
       }
       Serial.print(message);
-      Serial.print(value);
+      Serial.println(value);
   }
