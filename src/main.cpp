@@ -49,7 +49,7 @@ void setup() {
     Wire.begin();
   #endif
     
-    AHT20_Init();
+    AHT20_Init();   // Sensor temperature, humidity
  }
 
 /***********************************************************************

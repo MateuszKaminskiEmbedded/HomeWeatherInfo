@@ -10,11 +10,10 @@ void AHT20_Init(void){
     #if(SYSTEM_LOG == STD_ON)
       log(ERROR, "AHT20 sensor initialization failed");
     #endif
-    delay(20);
+    delay(1);
   }
   #if(SYSTEM_LOG == STD_ON)
     log(INFO, "AHT20 sensor initialization successful");
-    log(INFO, "AHT20 sensor start work");
   #endif
 }
 
@@ -24,7 +23,7 @@ AHT20_values AHT20getValue(void){
 
   if(aht20.startMeasurementReady(/* crcEn = */true)){
     #if(SYSTEM_LOG == STD_ON)
-      log(INFO, "AHT20 sensor measurement ready");
+      log(INFO, "AHT20 sensor measurement start");
     #endif
     // Get temp in Celsius (℃), range -40-80℃
     values.temperature = aht20.getTemperature_C();
